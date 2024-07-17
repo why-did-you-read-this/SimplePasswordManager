@@ -1,0 +1,6 @@
+testingFile.cpp
+cmake-build-*/
+test_files/
+.idea/
+CMakeLists.txt
+structure.txt
