@@ -2,6 +2,7 @@
 #include "password_generator/password_generator.hpp"
 #include "credentials/Credentials.hpp"
 #include <iostream>
+#include <limits>
 
 void showAboutProgram() {
     std::cout << "Simple Password Manager" << std::endl;
@@ -37,7 +38,6 @@ void openSPMFile(Credentials &credentials) {
     std::cin >> fileName;
     std::cout << "Enter the password:" << std::endl;
     std::cin >> password;
-    std::cout<< "1 " << fileName << " " << password << std::endl; // delme
 
     credentials.readFromFile(fileName, password);
 }
@@ -69,12 +69,15 @@ void addPassword(Credentials &credentials) {
 }
 
 void editPassword(Credentials &credentials) {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     size_t index;
     std::string name;
     std::string login;
     std::string password;
+    std::string s;
     std::cout << "Enter index:" << std::endl;
-    std::cin >> index;
+    std::getline(std::cin, s);
+    index = std::stoul(s);
     std::cout << "Credential with index " << index << ":" << std::endl;
     credentials[index].print();
     std::cout << "If you don't want to change any credentials, press enter" << std::endl;
